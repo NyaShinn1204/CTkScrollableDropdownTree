@@ -205,41 +205,18 @@ class CTkDropdownTest(customtkinter.CTkToplevel):
         self.after(50, self.focus_set)
         self.after(150, self.focus_set)
 
+    def on_row_select(self, event):
+        item = self.tree.selection()[0]
+        values = self.tree.item(item, 'values')
+        if self.command:
+            self.command({
+                "columns": self.tree["columns"],
+                "values": values
+            })
+        self._withdraw()  # Close the frame after selection
+
     def _toggle_visibility(self):
-        if not self.winfo_exists():
-            return
-        
-        if self.winfo_viewable():
+        if self.winfo_ismapped():
             self._withdraw()
         else:
             self.place_dropdown()
-
-    def _iconify(self):
-        if not self.winfo_exists():
-            return
-        
-        if self.autocomplete:
-            self.attach._entry.focus()
-        
-        selected_item = self.tree.selection()
-        if selected_item:
-            selected_value = self.tree.item(selected_item[0])["values"]
-            
-            if self.command:
-                self.command(selected_value)
-                
-            if isinstance(self.attach, customtkinter.CTkComboBox):
-                self.attach.set(selected_value)
-            elif isinstance(self.attach, customtkinter.CTkOptionMenu):
-                self.attach.set(selected_value)
-    
-        self._withdraw()
-        
-    def on_row_select(self, event):
-        selected_item = self.tree.selection()
-        if selected_item:
-            selected_values = self.tree.item(selected_item[0])["values"]
-            headers = self.tree["columns"]
-            result = {"columns": headers, "values": selected_values}
-            if self.command:
-                self.command(result)

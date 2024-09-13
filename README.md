@@ -42,7 +42,19 @@ entry = customtkinter.CTkEntry(root, placeholder_text="Click to select")
 entry.pack(pady=20, padx=20)
 
 CTkDropdownTest(
-    attach=entry, values=values, tree_colum=tree_values
+    attach=entry,
+    values=values,
+    tree_colum=tree_values
+)
+
+# Attach for Optionmenu!
+option_menu = customtkinter.CTkOptionMenu(root, values=["Select an option"])
+option_menu.pack(pady=20, padx=20)
+
+CTkDropdownTest(
+    attach=option_menu,
+    values=values,
+    tree_colum=tree_values
 )
 
 
