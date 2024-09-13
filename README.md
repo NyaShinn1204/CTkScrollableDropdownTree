@@ -7,7 +7,9 @@ Add a scrollable dropdown menu with an embedded tree
 
 ![Platform](https://img.shields.io/powershellgallery/p/Pester?color=blue)
 
-<!--![screenshots](https://user-images.githubusercontent.com/89206401/236677843-8d8b76fd-6145-47b1-8f4d-b6a64b08e1ea.png)-->
+![screenshots](https://github.com/user-attachments/assets/025ec723-92b6-4f18-b204-2efbcb70717b)
+![screenshots](https://github.com/user-attachments/assets/fae8d5c6-b197-49ba-8ea1-6fe9060c69fe)
+
 
 ## Installation
 ### [<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/NyaShinn1204/CTkScrollableDropdownTree?&color=white&label=Download%20Source%20Code&logo=Python&logoColor=yellow&style=for-the-badge"  width="400">](https://github.com/NyaShinn1204/CTkScrollableDropdownTree/archive/refs/heads/main.zip)
