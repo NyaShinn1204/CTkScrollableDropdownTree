@@ -76,6 +76,16 @@ CTkDropdownTest(
 root.mainloop()
 ```
 
+## Arguments
+| Parameter | Description |
+|-----------| ------------|
+| **attach** | parent widget to which the dropdown menu will be attached  |
+| **values** | value in tree  |
+| **tree_colum** | HEAD in tree |
+| tree_bg_color | **optional**, change the tree background color |
+| tree_fg_color | **optional**, change the tree foreground color |
+| _*Other Parameters_ | _All other parameters for ctkbutton or scrollbar can be passed in dropdownmenu_ |
+
 ## Note:
 This is a 99.999% copy of CTkScrollableDropdownFrame. It's for my own use, so I have no choice.
 
