@@ -11,7 +11,7 @@ class CTkDropdownTest(customtkinter.CTkToplevel):
                  scrollbar=True, scrollbar_button_hover_color=None, frame_border_width=2, values=[],
                  tree_colum=[], command=None, image_values=[], alpha: float = 0.97, frame_corner_radius=20, 
                  double_click=False, resize=True, frame_border_color=None, text_color=None, autocomplete=False, 
-                 hover_color=None, **button_kwargs):
+                 hover_color=None, tree_fg_color=None, tree_bg_color=None, **button_kwargs):
         
         super().__init__(master=attach.winfo_toplevel(), takefocus=1)
         
@@ -24,6 +24,9 @@ class CTkDropdownTest(customtkinter.CTkToplevel):
         self.focus_something = False
         self.disable = True
         self.update()
+        
+        self.tree_fg_color = tree_fg_color if tree_fg_color else "SystemWindowText"
+        self.tree_bg_color = tree_bg_color if tree_bg_color else "SystemWindow"
         
         if sys.platform.startswith("win"):
             self.after(100, lambda: self.overrideredirect(True))
@@ -69,11 +72,34 @@ class CTkDropdownTest(customtkinter.CTkToplevel):
         self.tree_frame._scrollbar.grid_configure(padx=3)
         self.tree_frame.pack(expand=True, fill="both")
         
-        self.tree = ttk.Treeview(self.tree_frame, columns=tree_colum, show='headings')
+        self.tree = ttk.Treeview(self.tree_frame, columns=tree_colum, show='headings',
+                                 
+                                 selectmode='browse', 
+                                 style="Custom.Treeview")
         for col in tree_colum:
             self.tree.heading(col, text=col)
         self.tree.pack(side="left", fill="both", expand=True)
         
+        # Apply the colors to Treeview
+        style = ttk.Style()
+        style.theme_use("default")
+        print(self.tree_bg_color)
+        style.configure("Custom.Treeview",
+                        background=self.tree_bg_color,
+                        foreground=self.tree_fg_color,
+                        fieldbackground=self.tree_bg_color)
+        style.configure("Custom.Treeview.Heading",
+                        background=self.tree_bg_color,
+                        foreground=self.tree_fg_color)
+        #style.configure("Custom.Treeview.Heading",
+        #          font=("BIZ UDゴシック", 10),
+        #          background="PowderBlue",
+        #          foreground="red")
+        style.map('Custom.Treeview',
+                  background=[('selected', '#274f62')],
+        )
+
+        # Scrollbar setup
         self.scrollbar = tk.Scrollbar(self.tree_frame, orient="vertical", command=self.tree.yview)
         self.scrollbar.pack(side="right", fill="y")
         self.tree.configure(yscrollcommand=self.scrollbar.set)
