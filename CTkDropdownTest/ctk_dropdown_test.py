@@ -232,14 +232,16 @@ class CTkDropdownTest(customtkinter.CTkToplevel):
         self.after(150, self.focus_set)
 
     def on_row_select(self, event):
-        item = self.tree.selection()[0]
-        values = self.tree.item(item, 'values')
-        if self.command:
-            self.command({
-                "columns": self.tree["columns"],
-                "values": values
-            })
-        self._withdraw()  # Close the frame after selection
+        selected_items = self.tree.selection()
+        if selected_items:
+            item = selected_items[0]
+            values = self.tree.item(item, 'values')
+            if self.command:
+                self.command({
+                    "columns": self.tree["columns"],
+                    "values": values
+                })
+            self._withdraw()  # Close the frame after selection
 
     def _toggle_visibility(self):
         if self.winfo_ismapped():
