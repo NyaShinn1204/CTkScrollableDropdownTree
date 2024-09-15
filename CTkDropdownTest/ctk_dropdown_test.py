@@ -243,6 +243,21 @@ class CTkDropdownTest(customtkinter.CTkToplevel):
                 })
             self._withdraw()  # Close the frame after selection
 
+    # configureメソッドを追加
+    def configure(self, values=None, **kwargs):
+        if values is not None:
+            self.values = values
+            self._update_tree()  # Treeviewの内容を更新
+
+    def _update_tree(self):
+        # Treeview内のすべてのエントリをクリア
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+        
+        # 新しいvaluesをTreeviewに挿入
+        for row in self.values:
+            self.tree.insert('', 'end', values=row)
+
     def _toggle_visibility(self):
         if self.winfo_ismapped():
             self._withdraw()
